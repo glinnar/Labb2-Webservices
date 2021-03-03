@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SnakeService {
+public class SnakeService implements com.iths.labb2.services.Service {
     private final SnakeMapper snakeMapper;
     private SnakeRepository snakeRepository;
 
@@ -22,14 +22,17 @@ public class SnakeService {
         this.snakeMapper = snakeMapper;
     }
 
+    @Override
     public List<SnakeDto> getAllSnakes() {
         return snakeMapper.mapp(snakeRepository.findAll());
     }
 
+    @Override
     public Optional<SnakeDto> getOne(Integer id) {
         return snakeMapper.mapp(snakeRepository.findById(id));
     }
 
+    @Override
     public SnakeDto createSnake(SnakeDto snake) {
         if (snake.getName().isEmpty())
             throw new RuntimeException();
@@ -38,11 +41,13 @@ public class SnakeService {
     }
 
 
+    @Override
     public void deleteSnake(Integer id) {
         snakeRepository.deleteById(id);
     }
 
 
+    @Override
     public SnakeDto replaceSnake(Integer id, SnakeDto snakeDto) {
         Optional<Snake> snake = snakeRepository.findById(id);
 
@@ -60,6 +65,7 @@ public class SnakeService {
 
     }
 
+    @Override
     public SnakeDto updateSnake(Integer id, SnakeType snakeType) {
         Optional<Snake> snake = snakeRepository.findById(id);
 
