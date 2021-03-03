@@ -10,11 +10,12 @@ import java.util.Optional;
 
 @Service
 public class SnakeService {
-    private final SnakeMapper snakeMapper = new SnakeMapper();
+    private final SnakeMapper snakeMapper;
     private SnakeRepository snakeRepository;
 
-    public SnakeService(SnakeRepository snakeRepository) {
+    public SnakeService(SnakeRepository snakeRepository,SnakeMapper snakeMapper) {
         this.snakeRepository = snakeRepository;
+        this.snakeMapper = snakeMapper;
     }
 
     public List<SnakeDto> getAllSnakes() {
