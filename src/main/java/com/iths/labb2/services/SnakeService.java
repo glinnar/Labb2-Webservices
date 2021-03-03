@@ -66,7 +66,7 @@ public class SnakeService {
         if (snake.isPresent()) {
 
             Snake updatedSnake = snake.get();
-           ;
+            ;
             if (snakeType.type != null)
                 updatedSnake.setType(snakeType.type);
 

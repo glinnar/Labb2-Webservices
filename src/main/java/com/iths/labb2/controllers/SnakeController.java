@@ -29,38 +29,36 @@ public class SnakeController {
     @GetMapping("/snake/{id}")
     public SnakeDto getOne(@PathVariable Integer id) {
         return snakeService.getOne(id)
-                .orElseThrow(()->  new ResponseStatusException(HttpStatus.NOT_FOUND,
-                "Id " + id + " not found."));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Id " + id + " not found."));
 
     }
 
 
     @PostMapping("/snakes")
     @ResponseStatus(HttpStatus.CREATED)
-    public SnakeDto create(@RequestBody SnakeDto snake){
+    public SnakeDto create(@RequestBody SnakeDto snake) {
         return snakeService.createSnake(snake);
 
     }
+
     @DeleteMapping("/snakes/{id}")
-    public void delete(@PathVariable Integer id){
+    public void delete(@PathVariable Integer id) {
         snakeService.deleteSnake(id);
 
     }
 
     @PutMapping("/snakes/{id}")
-    public SnakeDto replace(@RequestBody SnakeDto snakeDto,@PathVariable Integer id){
-       return snakeService.replaceSnake(id,snakeDto);
+    public SnakeDto replace(@RequestBody SnakeDto snakeDto, @PathVariable Integer id) {
+        return snakeService.replaceSnake(id, snakeDto);
 
     }
 
-    @PatchMapping ("/snakes/{id}")
-    public SnakeDto update(@RequestBody SnakeType snakeType, @PathVariable Integer id){
-        return snakeService.updateSnake(id,snakeType);
+    @PatchMapping("/snakes/{id}")
+    public SnakeDto update(@RequestBody SnakeType snakeType, @PathVariable Integer id) {
+        return snakeService.updateSnake(id, snakeType);
 
     }
-
-
-
 
 
 }
