@@ -16,16 +16,14 @@ public class Snake {
     private String gender;
 
 
-    public Snake (String name, String type, double weight, String gender) {
+    public Snake(String name, String type, double weight, String gender) {
         this.name = name;
         this.type = type;
         this.weight = weight;
         this.gender = gender;
     }
 
-    public Snake() {
 
-    }
 
     public void setId(int id) {
         this.id = id;

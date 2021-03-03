@@ -2,33 +2,40 @@ package com.iths.labb2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 @RestController
-public class Controller {
+public class SnakeController {
 
-    private SnakeRepository snakeRepository;
+    private SnakeService snakeService;
 
     @Autowired
-    public Controller(SnakeRepository snakeRepository) {
-        this.snakeRepository = snakeRepository;
+    public SnakeController(SnakeService snakeService) {
+        this.snakeService = snakeService;
     }
 
     @GetMapping("/Snakes")
-    public List<Snake> listSnakes() {
-        return snakeRepository.findAll();
+    public List<SnakeDto> listSnakes() {
+        return snakeService.getAllSnakes();
     }
 
+
     @GetMapping("/snake/{id}")
-    public Snake getOne(@PathVariable Integer id) {
-        return snakeRepository.findById(id)
+    public SnakeDto getOne(@PathVariable Integer id) {
+        return snakeService.getOne(id)
                 .orElseThrow(()->  new ResponseStatusException(HttpStatus.NOT_FOUND,
                 "Id " + id + " not found."));
+
+    }
+
+
+    @PostMapping("/Snakes")
+    @ResponseStatus(HttpStatus.CREATED)
+    public SnakeDto create(@RequestBody SnakeDto snake){
+        return snakeService.createSnake(snake);
 
     }
 
