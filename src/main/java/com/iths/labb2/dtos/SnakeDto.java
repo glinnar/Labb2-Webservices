@@ -1,4 +1,4 @@
-package com.iths.labb2;
+package com.iths.labb2.dtos;
 
 
 public class SnakeDto {
