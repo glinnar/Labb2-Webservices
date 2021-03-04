@@ -33,9 +33,9 @@ public class SnakeMapper {
 
     }
 
-    public List<SnakeDto> mapp(List<Snake> all) {
+    public List<SnakeDto> mapp(List<Snake> snakeList) {
 
-        return all
+        return snakeList
                 .stream()
                 .map(this::mapp)
                 .collect(Collectors.toList());

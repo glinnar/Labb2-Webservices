@@ -15,7 +15,7 @@ import java.util.Optional;
 @Service
 public class SnakeService implements com.iths.labb2.services.Service {
     private final SnakeMapper snakeMapper;
-    private SnakeRepository snakeRepository;
+    private final SnakeRepository snakeRepository;
 
     public SnakeService(SnakeRepository snakeRepository, SnakeMapper snakeMapper) {
         this.snakeRepository = snakeRepository;
@@ -82,5 +82,10 @@ public class SnakeService implements com.iths.labb2.services.Service {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,
                     "Id " + id + " not found");
         }
+    }
+
+    @Override
+    public List<SnakeDto> searchByGender(String gender) {
+        return snakeMapper.mapp(snakeRepository.findAllByGender(gender));
     }
 }

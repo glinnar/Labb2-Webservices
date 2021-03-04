@@ -18,4 +18,5 @@ public interface Service {
     SnakeDto replaceSnake(Integer id, SnakeDto snakeDto);
 
     SnakeDto updateSnake(Integer id, SnakeType snakeType);
+    List<SnakeDto> searchByGender(String gender);
 }

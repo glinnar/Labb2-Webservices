@@ -3,19 +3,17 @@ package com.iths.labb2.controllers;
 import com.iths.labb2.dtos.SnakeDto;
 import com.iths.labb2.dtos.SnakeType;
 import com.iths.labb2.services.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-
+@RestController
 public class SnakeController {
 
-    private Service service;
+    private final Service service;
 
-    @Autowired
     public SnakeController(Service service) {
         this.service = service;
     }
@@ -57,6 +55,11 @@ public class SnakeController {
     @PatchMapping("/snakes/{id}")
     public SnakeDto update(@RequestBody SnakeType snakeType, @PathVariable Integer id) {
         return service.updateSnake(id, snakeType);
+
+    }
+    @GetMapping(value = "/snakes/search",params = "gender")
+        public List<SnakeDto> searchByGender(@RequestParam String gender){
+        return service.searchByGender(gender);
 
     }
 

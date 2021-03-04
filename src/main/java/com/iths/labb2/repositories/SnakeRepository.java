@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface SnakeRepository extends JpaRepository<Snake, Integer> {
     List<Snake> findAllByName(String name);
+    List<Snake> findAllByGender(String gender);
 
 }
 
