@@ -56,7 +56,7 @@ class SnakeControllerTest {
     }
 
     @Test
-    void getOneSnakeWithInvalidIdshouldReturn404() throws Exception {
+    void getOneSnakeWithInvalidIdShouldReturn404() throws Exception {
         SnakeDto snakeDto = new SnakeDto(1, "Sir Hizz", "Viper", 20.00, "Male");
         when(service.getOne(snakeDto.getId())).thenReturn(null);
 
@@ -119,7 +119,7 @@ class SnakeControllerTest {
     }
 
     @Test
-    void updateASnakesType() throws Exception {
+    void updateASpecifiSnakesType() throws Exception {
         SnakeDto snakeDto = new SnakeDto(1, "Sir Hizz", "Viper", 20.00, "Male");
         SnakeType snakeType = new SnakeType();
         Gson gson = new Gson();
