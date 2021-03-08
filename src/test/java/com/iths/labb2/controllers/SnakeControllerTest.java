@@ -34,7 +34,8 @@ class SnakeControllerTest {
     void listALLSnakesInDatabase() throws Exception {
         when(service.getAllSnakes()).thenReturn(List.of(new SnakeDto(1, "Sir Hizz", "Viper", 20.00, "Male")));
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/snakes").accept(MediaType.APPLICATION_JSON))
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/snakes")
+                .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
 
         assertThat(result.getResponse().getStatus()).isEqualTo(200);
@@ -43,9 +44,10 @@ class SnakeControllerTest {
 
     @Test
     void getOneSnakeWithSpecificId() throws Exception {
-        when(service.getOne(1)).thenReturn(Optional.of((new SnakeDto(1, "Sir Hizz", "Viper", 20.00, "Male"))));
+        SnakeDto snakeDto = new SnakeDto(1, "Sir Hizz", "Viper", 20.00, "Male");
+        when(service.getOne(1)).thenReturn(Optional.of(snakeDto));
 
-        var result = mockMvc.perform(MockMvcRequestBuilders.get("/snakes/{id}", 1)
+        var result = mockMvc.perform(MockMvcRequestBuilders.get("/snakes/{id}", snakeDto.getId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
 
@@ -55,7 +57,8 @@ class SnakeControllerTest {
 
     @Test
     void getOneSnakeWithInvalidIdshouldReturn404() throws Exception {
-        when(service.getOne(1)).thenReturn(null);
+        SnakeDto snakeDto = new SnakeDto(1, "Sir Hizz", "Viper", 20.00, "Male");
+        when(service.getOne(snakeDto.getId())).thenReturn(null);
 
         var result = mockMvc.perform(MockMvcRequestBuilders.get("/snakes/{id}", 2)
                 .accept(MediaType.APPLICATION_JSON))
