@@ -105,9 +105,9 @@ class SnakeControllerTest {
     @Test
     void replaceASpecificSnakeById() throws Exception {
         SnakeDto snakeDto = new SnakeDto(1, "Sir Hizz", "Viper", 20.00, "Male");
-        SnakeDto newsnakeDto = new SnakeDto(1, "Nagini", "Cobra", 40.00, "Female");
+        SnakeDto updatedSnakeDto = new SnakeDto(1, "Nagini", "Cobra", 40.00, "Female");
         Gson gson = new Gson();
-        when(service.replaceSnake(snakeDto.getId(), snakeDto)).thenReturn(newsnakeDto);
+        when(service.replaceSnake(snakeDto.getId(), snakeDto)).thenReturn(updatedSnakeDto);
         var result = mockMvc.perform(MockMvcRequestBuilders.put("/snakes/{id}", snakeDto.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(gson.toJson(snakeDto)))
